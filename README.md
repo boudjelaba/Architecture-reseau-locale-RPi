@@ -1,6 +1,22 @@
 # Systeme-Alerte-Connecte-avec-Raspberry-Pi
 
 
+```python
+html += f"""
+            <div class="alerte" style="border-color: {couleur_localisation};">
+                <h3 style="color: {couleur_localisation};">Alerte #{i} - {type_alerte}</h3>
+                <p><strong>Reçue :</strong> {alerte['timestamp_reception']}</p>
+                <p><strong>Source :</strong> {alerte['donnees'].get('source', 'Inconnue')}</p>
+                <p><strong>Message :</strong> {alerte['donnees'].get('message', 'Aucun message')}</p>
+                <p><strong>Utilisation CPU :</strong> {alerte['donnees'].get('system_info', {}).get('cpu_usage', 'N/A')}%</p>
+                <p><strong>Utilisation mémoire :</strong> {alerte['donnees'].get('system_info', {}).get('memory_usage', 'N/A')}%</p>
+                <p><strong>Température :</strong> {alerte['donnees'].get('temperature', 'N/A')} °C</p>
+                <p><strong>Localisation :</strong> {localisation}</p>
+                <p><strong>IP source :</strong> {alerte['donnees'].get('ip_source', 'Inconnue')}</p>
+            </div>
+            """
+```
+
 ## **TP : Système d’Alerte Connecté avec Raspberry Pi**
 
 ---
