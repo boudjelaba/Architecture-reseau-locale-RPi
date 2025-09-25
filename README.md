@@ -76,3 +76,41 @@
 Le système doit être **léger**, **réactif**, et pouvoir être **déployé facilement** sur d’autres Raspberry Pi.
 
 ---
+
+## Bouton
+
+```python
+# test_composants.py
+import RPi.GPIO as GPIO
+import time
+
+# Configuration GPIO
+BUTTON_PIN = 17
+LED_PIN = 27
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(LED_PIN, GPIO.OUT)
+
+print("=== Test des Composants ===")
+print("Appuyez sur le bouton (Ctrl+C pour quitter)")
+
+try:
+    while True:
+        # Lecture bouton (LOW = pressé avec pull-up)
+        if GPIO.input(BUTTON_PIN) == GPIO.LOW:
+            print("Bouton détecté !")
+            GPIO.output(LED_PIN, GPIO.HIGH)  # Allumer LED
+            time.sleep(0.5)
+            GPIO.output(LED_PIN, GPIO.LOW)   # Éteindre LED
+            
+            # Anti-rebond simple
+            time.sleep(0.3)
+        
+        time.sleep(0.1)
+        
+except KeyboardInterrupt:
+    print("\nArrêt du test")
+finally:
+    GPIO.cleanup()
+```
